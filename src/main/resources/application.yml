@@ -1,0 +1,39 @@
+spring:
+  messages:
+    encoding: UTF-8
+  datasource:
+    url: jdbc:postgresql://localhost:5436/myappdb
+    username: myapp
+    password: password
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  security:
+    oauth2:
+      resource server:
+        jwt:
+          issuer-uri: http://localhost:8080/realms/shop
+      client:
+        provider:
+          keycloak:
+            issuer-uri: http://localhost:8080/realms/shop
+            user-name-attribute: preferred_username
+        registration:
+          keycloak:
+            client-id: springsecurity
+            client-secret: UB9EYxxE61Sc6qkwMwSMgIXqVB4ccJpZ
+            scope: openid
+
+server:
+  port: 8081
+logging:
+  level:
+    org.springframework.security: DEBUG
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    operations-sorter: method
+  api-docs:
+    enabled: true
+    path: /v3/api-docs

@@ -1,0 +1,6 @@
+пример джсонки
+{
+  "email": "leila@example.com",
+  "keycloakId": "abc-123-xyz",
+  "fullName": "Лейла Альпиева"
+}
