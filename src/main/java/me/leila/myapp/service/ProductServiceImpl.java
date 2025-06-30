@@ -6,6 +6,7 @@ import me.leila.myapp.controller.dto.CreateProductRequest;
 import me.leila.myapp.controller.dto.UpdateProductRequest;
 import me.leila.myapp.controller.dto.ProductDto;
 import me.leila.myapp.model.Product;
+import me.leila.myapp.model.Usr;
 import me.leila.myapp.repository.ProductRepository;
 import me.leila.myapp.repository.UserRepository;
 import org.springframework.stereotype.Service;
@@ -29,7 +30,12 @@ public class ProductServiceImpl implements ProductService {
         product.setDescription(request.getDescription());
         product.setPrice(request.getPrice());
         product.setStock(request.getStock());
-        userService.getUserById(request.getUsrId()).orElseThrow(()-> new RuntimeException("rty"));
+
+        Usr user = userService.getUserById(request.getUsrId())
+                .orElseThrow(() -> new EntityNotFoundException("User not found"));
+
+        product.setUsr(user);
+
         return toDto(productRepository.save(product));
     }
 
